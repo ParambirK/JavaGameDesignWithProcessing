@@ -1,7 +1,7 @@
 /* Game Class Starter File
  * Last Edit: 12/13/2022
- * Authors: Parambir K & Hazril S
- */
+ * Authors: Parambir K & Hazril Suwandi & Joshua D
+ */ 
 
 //GAME VARIABLES
 Grid grid = new Grid(6,8);
