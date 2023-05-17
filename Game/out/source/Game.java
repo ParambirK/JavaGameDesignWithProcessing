@@ -328,16 +328,16 @@ public class AnimatedSprite extends Sprite{
 
 
 }
-PImage bg;
+// PImage bg;
 
-public void setup(){
-    /* size commented out by preprocessor */;
-    bg=loadImage("images/Background.webp");
-}
+// public void setup(){
+//     size(1,920,1080);
+//     bg=loadImage("images/Background.webp");
+// }
 
-public void draw(){
+// public void draw(){
 
-}
+// }
 /* Grid Class - Used for rectangular-tiled games
  * A 2D array of GridTiles which can be marked
  * Author: Joel Bianchi
@@ -1573,7 +1573,7 @@ public class Sprite {
 }
 
 
-  public void settings() { size(1, 920, 1080); }
+  public void settings() { size(800, 600); }
 
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "Game" };
