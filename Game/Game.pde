@@ -1,6 +1,6 @@
 /* Game Class Starter File
  * Last Edit: 12/13/2022
- * Authors: _____________________
+ * Authors: Parambir K & Hazril S
  */
 
 //GAME VARIABLES
