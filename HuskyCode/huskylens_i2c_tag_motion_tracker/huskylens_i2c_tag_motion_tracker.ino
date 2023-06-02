@@ -1,30 +1,35 @@
-/***************************************************
- HUSKYLENS An Easy-to-use AI Machine Vision Sensor
- <https://www.dfrobot.com/product-1922.html>
- 
- Connection and Diagram can be found here
- <https://wiki.dfrobot.com/HUSKYLENS_V1.0_SKU_SEN0305_SEN0336#target_23>
- 
- Make sure to install library:
- A. Download code from: https://github.com/HuskyLens/HUSKYLENSArduino/archive/refs/heads/master.zip
- B. Unzip main file
- C. Sketch>Include Libraries>Add .zip library
- D. Choose the HuskyLens.zip file
- 
- Older Version of Arduino Code online:
- https://create.arduino.cc/editor/parambir17/b9a71742-bf70-4b8a-ac04-dd9e54f7f769/preview
- 
- ****************************************************/
-
 #include "HUSKYLENS.h"
+int oldx;
+int newx; 
+int oldy;
+int newy;
+//Button Mapping
+  int x = 11;
+  int cir = 2;
+  int sq = 3;
+  int tri = 4;
+//D-pad Mapping
+  int up = 5;
+  int down = 6;
+  int right = 7;
+  int left = 8;
 
 HUSKYLENS huskylens;
 //HUSKYLENS green line >> SDA; blue line >> SCL
 void printResult(HUSKYLENSResult result);
 
+
 void setup() {
     Serial.begin(9600);
     Wire.begin();
+    pinMode(x, INPUT);
+    pinMode(cir, INPUT);
+    pinMode(sq, INPUT);
+    pinMode(tri, INPUT);
+    pinMode(up, INPUT);
+    pinMode(down, INPUT);
+    pinMode(right, INPUT);
+    pinMode(left, INPUT);
     while (!huskylens.begin(Wire))
     {
         Serial.println(F("Begin failed!"));
@@ -45,7 +50,12 @@ void loop() {
         {
             HUSKYLENSResult result = huskylens.read();
             printResult(result);
-        }    
+            if(xdifference(result)>19){
+              Serial.println(xdifference(result));
+            }
+            
+        }
+        
     }
 }
 
@@ -59,4 +69,21 @@ void printResult(HUSKYLENSResult result){
     else{
         Serial.println("Object unknown!");
     }
+}
+int xdifference (HUSKYLENSResult result){
+  if(result.command == COMMAND_RETURN_BLOCK){
+    oldx=result.xCenter;
+    delay(5);
+    newx=result.xCenter;
+    return newx-oldx;
+  }
+}
+
+int ydifference (HUSKYLENSResult result){
+  if(result.command == COMMAND_RETURN_BLOCK){
+  oldy=result.xCenter;
+  delay(5);
+  newy=result.xCenter;
+  return newy-oldy;
+  }
 }
