@@ -30,6 +30,7 @@ void setup() {
     pinMode(down, INPUT);
     pinMode(right, INPUT);
     pinMode(left, INPUT);
+
     while (!huskylens.begin(Wire))
     {
         Serial.println(F("Begin failed!"));
@@ -40,6 +41,7 @@ void setup() {
 }
 
 void loop() {
+
     if (!huskylens.request()) Serial.println(F("Fail to request data from HUSKYLENS, recheck the connection!"));
     else if(!huskylens.isLearned()) Serial.println(F("Nothing learned, press learn button on HUSKYLENS to learn one!"));
     else if(!huskylens.available()) Serial.println(F("No block or arrow appears on the screen!"));
@@ -50,8 +52,12 @@ void loop() {
         {
             HUSKYLENSResult result = huskylens.read();
             printResult(result);
-            if(xdifference(result)>19){
-              Serial.println(xdifference(result));
+
+            int xdiff = xdifference(result); 
+            Serial.println(xdiff);
+
+            if(xdiff > 19){
+              Serial.println("BIG DIFF!");
             }
             
         }
@@ -70,6 +76,8 @@ void printResult(HUSKYLENSResult result){
         Serial.println("Object unknown!");
     }
 }
+
+//TRIGGER A COMBO? FUNCTIONS
 int xdifference (HUSKYLENSResult result){
   if(result.command == COMMAND_RETURN_BLOCK){
     oldx=result.xCenter;
@@ -87,3 +95,10 @@ int ydifference (HUSKYLENSResult result){
   return newy-oldy;
   }
 }
+
+
+//ADD JOSHUA'S COMBO BUTTONS FUNCTIONS HERE
+
+
+
+
