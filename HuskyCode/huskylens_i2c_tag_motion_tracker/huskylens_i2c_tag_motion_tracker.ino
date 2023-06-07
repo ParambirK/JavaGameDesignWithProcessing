@@ -58,6 +58,7 @@ void loop() {
 
             if(xdiff > 19){
               Serial.println("BIG DIFF!");
+              stageFatality();
             }
             
         }
@@ -98,6 +99,20 @@ int ydifference (HUSKYLENSResult result){
 
 
 //ADD JOSHUA'S COMBO BUTTONS FUNCTIONS HERE
+void stageFatality(){
+  pushButton(left, 115);
+  pushButton(down, 115);
+  pushButton(down, 115);
+  pushButton(sq, 115); 
+}
+
+
+void pushButton(int pin, int t){
+  digitalWrite(pin, HIGH); 
+  delay(t);
+  digitalWrite(pin, LOW);
+}
+
 
 
 
